@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Directives · WarpJS</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Directives are used during the build of the frontend and server JavaScript files to indicate the visibility of a function."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Directives · WarpJS"/><meta property="og:type" content="website"/><meta property="og:url" content="https://warpjs.dev/"/><meta property="og:description" content="Directives are used during the build of the frontend and server JavaScript files to indicate the visibility of a function."/><meta property="og:image" content="https://warpjs.dev/img/logo.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://warpjs.dev/img/logo.png"/><link rel="shortcut icon" href="/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/logo.png" alt="WarpJS"/><h2 class="headerTitleWithLogo">WarpJS</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="https://github.com/warpjs/warp" target="_self">GitHub</a></li><li class=""><a target="_self"></a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>API Reference</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Getting Started</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/">What is WarpJS?</a></li><li class="navListItem"><a class="navItem" href="/docs/getting-started">Quick Start</a></li><li class="navListItem"><a class="navItem" href="/docs/nodejs-modules">Using Node.js Modules</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">API Reference</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/api/">API Reference</a></li><li class="navListItem"><a class="navItem" href="/docs/api/requirements">Requirements</a></li><li class="navListItem"><a class="navItem" href="/docs/api/setup">Setup</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/api/directives">Directives</a></li><li class="navListItem"><a class="navItem" href="/docs/api/engine">Engine</a></li><li class="navListItem"><a class="navItem" href="/docs/api/warper">Warper</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Directives</h1></header><article><div><span><p>Directives are used during the build of the frontend and server JavaScript files to indicate the visibility of a function.</p>
+<p>A WarpJS directive starts with <code>'warp'</code>,</p>
+<p>To indicate the visibility of the code in the frontend asset use <code>-client</code> to indicate that the code will be deleted from the original JavaScript file, or <code>+client</code> to indicate to keep the code in your browser asset.</p>
+<p>In the same way, use <code>-server</code> to indicate that the code will be deleted from the server code, or <code>+server</code> to get the code on the server.</p>
+<p>Example, indicate the function <code>hello</code> should exist on the server, but not on the frontend:</p>
+<pre><code class="hljs css language-js"><span class="hljs-comment">// warp function</span>
+<span class="hljs-keyword">const</span> hello = <span class="hljs-function">(<span class="hljs-params">name</span>) =&gt;</span> {
+  <span class="hljs-comment">// warp directive</span>
+  <span class="hljs-string">'warp +server -client'</span>
+ 
+  <span class="hljs-keyword">return</span> <span class="hljs-string">`Hello <span class="hljs-subst">${name}</span> from Node.js <span class="hljs-subst">${process.version}</span> 👋`</span>
+}
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/api/setup"><span class="arrow-prev">← </span><span>Setup</span></a><a class="docs-next button" href="/docs/api/engine"><span>Engine</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/logo.png" alt="WarpJS" height="32"/></a><div><h5>Docs</h5><a href="/docs/.">Getting Started</a><a href="/docs/api/">API Reference</a></div><div><h5>WarpJS</h5><a href="https://warpjs.com/" target="_blank" rel="noopener">Website</a><a href="https://twitter.com/WeWarpJS" target="_blank" rel="noreferrer noopener">Twitter</a><a href="https://www.linkedin.com/showcase/warpjs/" target="_blank" rel="noreferrer noopener">LinkedIn</a></div><div><h5>More</h5><a href="https://www.npmjs.com/package/@warpjs/warp" target="_blank" rel="noreferrer noopener">npm</a><a href="https://github.com/warpjs/warp" target="_blank" rel="noreferrer noopener">GitHub</a><a href="https://www.scaledynamics.io/" target="_blank" rel="noopener">About Us</a></div></section><section class="copyright">© ScaleDynamics - 2020</section></footer></div></body></html>
