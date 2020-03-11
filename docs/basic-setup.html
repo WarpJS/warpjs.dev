@@ -1,0 +1,173 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Basic Setup · WarpJS</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="From the [WarpJS Starter Template](https://github.com/WarpJS/warpjs-starter-template) used on the [Quick Start](/docs/getting-started), we will details each step to setup a project with WarpJS, create a &quot;hello world&quot; back-end function, test locally and finally deploy it on production."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Basic Setup · WarpJS"/><meta property="og:type" content="website"/><meta property="og:url" content="https://warpjs.dev/"/><meta property="og:description" content="From the [WarpJS Starter Template](https://github.com/WarpJS/warpjs-starter-template) used on the [Quick Start](/docs/getting-started), we will details each step to setup a project with WarpJS, create a &quot;hello world&quot; back-end function, test locally and finally deploy it on production."/><meta property="og:image" content="https://warpjs.dev/img/warpjs-black-social.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://warpjs.dev/img/warpjs-black-social-square.png"/><link rel="shortcut icon" href="/img/favicon.ico"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-117302076-5', 'auto');
+              ga('send', 'pageview');
+            </script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script><script type="text/javascript" src="/js/code-block-buttons.js"></script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/logo.png" alt="WarpJS"/><h2 class="headerTitleWithLogo">WarpJS</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="https://github.com/warpjs/warp" target="_self">GitHub</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Getting Started</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Getting Started</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/">What is WarpJS?</a></li><li class="navListItem"><a class="navItem" href="/docs/getting-started">Quick Start</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/basic-setup">Basic Setup</a></li><li class="navListItem"><a class="navItem" href="/docs/nodejs-modules">Using Node.js Modules</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">API Reference</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/api/">API Reference</a></li><li class="navListItem"><a class="navItem" href="/docs/api/requirements">Requirements</a></li><li class="navListItem"><a class="navItem" href="/docs/api/setup">Setup</a></li><li class="navListItem"><a class="navItem" href="/docs/api/directives">Directives</a></li><li class="navListItem"><a class="navItem" href="/docs/api/engine">Engine</a></li><li class="navListItem"><a class="navItem" href="/docs/api/warper">Warper</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">Basic Setup</h1></header><article><div><span><p>From the <a href="https://github.com/WarpJS/warpjs-starter-template">WarpJS Starter Template</a> used on the <a href="/docs/getting-started">Quick Start</a>, we will details each step to setup a project with WarpJS, create a &quot;hello world&quot; back-end function, test locally and finally deploy it on production.</p>
+<h2><a class="anchor" aria-hidden="true" id="configure-webpack"></a><a href="#configure-webpack" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Configure webpack</h2>
+<p>To take advantage of the WarpJS technology, you have to build your JavaScript project using <a href="https://webpack.js.org/">Webpack</a>, one of the most popular bundlers.</p>
+<p>Our <a href="https://github.com/WarpJS/warpjs-starter-template">starter</a> project includes webpack and the most common webpack plugins to give you a great developer experience.
+If you prefer start a new project from scratch, see the documentation about <a href="/docs/api/setup">advanced setup</a>.</p>
+<h3><a class="anchor" aria-hidden="true" id="install-warp-plugin"></a><a href="#install-warp-plugin" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Install Warp plugin</h3>
+<p>Install with <code>npm</code> the <a href="https://www.npmjs.com/package/@warpjs/webpack-plugin"><code>@warpjs/webpack-plugin</code></a></p>
+<pre><code class="hljs css language-bash">npm install --save-dev @warpjs/webpack-plugin
+</code></pre>
+<p>Please note that the WarpJS webpack plugin is only compatible with <strong>webpack 4</strong>.</p>
+<h3><a class="anchor" aria-hidden="true" id="update-webpack-config"></a><a href="#update-webpack-config" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Update webpack config</h3>
+<ol>
+<li><p>Open your <code>webpack.config.js</code> file.</p></li>
+<li><p>Import the plugin package:</p></li>
+</ol>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">const</span> WarpifyPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@warpjs/webpack-plugin'</span>)
+</code></pre>
+<ol start="3">
+<li>Create a new plugin instance:</li>
+</ol>
+<pre><code class="hljs css language-js"><span class="hljs-built_in">module</span>.exports = {
+  <span class="hljs-attr">plugins</span>: [
+    <span class="hljs-comment">//...</span>
+    <span class="hljs-keyword">new</span> WarpifyPlugin()
+  ]
+}
+</code></pre>
+<p>By default, your <code>WarpifyPlugin</code> is configured to use the <code>&quot;demo&quot;</code> project from your WarpJS account.<br>
+You can create a new project on your <a href="https://starbase.warpjs.com">WarpJS console</a>, and then configure it in the webpack plugin as follows:</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">new</span> WarpifyPlugin({
+  <span class="hljs-attr">config</span>: {
+    <span class="hljs-attr">project</span>: {
+      <span class="hljs-attr">name</span>: <span class="hljs-string">"YOUR_PROJECT_NAME"</span>
+    }
+  }
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="create-a-warp-function"></a><a href="#create-a-warp-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Create a Warp function</h2>
+<p>Note that the project will use a Node 8 runtime with ES2017 syntax.</p>
+<h3><a class="anchor" aria-hidden="true" id="install-packages"></a><a href="#install-packages" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Install packages</h3>
+<p>Install with <code>npm</code> the core libraries required to run WarpJS:</p>
+<pre><code class="hljs css language-bash">npm install --save @warpjs/engine
+npm install --save @warpjs/warp
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="init-engine"></a><a href="#init-engine" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Init engine</h3>
+<p>Initialize the WarpJS <code>engine</code> once at application start:</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">import</span> engine <span class="hljs-keyword">from</span> <span class="hljs-string">'@warpjs/engine'</span>
+
+engine.init()
+</code></pre>
+<p>See the documentation about <a href="/docs/api/engine"><code>@warpjs/engine</code></a>.</p>
+<h3><a class="anchor" aria-hidden="true" id="add-directive"></a><a href="#add-directive" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Add directive</h3>
+<p>Next, you have to add the <a href="/docs/api/directives">WarpJS directive</a> (eg. <code>'warp +server -client'</code>) to indicate WarpJS to manage your JavaScript function, and allow it to be run serverless:</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">const</span> hello = <span class="hljs-function">(<span class="hljs-params">name</span>) =&gt;</span> {
+  <span class="hljs-string">'warp +server -client'</span>
+
+  <span class="hljs-keyword">return</span> <span class="hljs-string">`Hello <span class="hljs-subst">${name}</span> from Node.js <span class="hljs-subst">${process.version}</span> 👋`</span>
+}
+</code></pre>
+<p>See the documentation about <a href="/docs/api/directives"><code>directives</code></a>.</p>
+<h3><a class="anchor" aria-hidden="true" id="warp-call"></a><a href="#warp-call" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Warp call</h3>
+<p>Finally, you have to call the warp function from the <code>warp.call(...)</code> helper, and handle the response as an async <code>Promise</code>:</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">import</span> { defaultWarper <span class="hljs-keyword">as</span> warp } <span class="hljs-keyword">from</span> <span class="hljs-string">'@warpjs/warp'</span>
+
+warp.call(hello, <span class="hljs-string">'World'</span>).then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> {
+  result.innerHTML = response
+})
+</code></pre>
+<p>See the documentation about <a href="/docs/api/warper"><code>warp.call()</code></a>.</p>
+<h2><a class="anchor" aria-hidden="true" id="update-npm-scripts"></a><a href="#update-npm-scripts" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Update npm scripts</h2>
+<p>Now you can set up a few little shortcuts to help you in the development environment.</p>
+<p>Add the following npm scripts in your <code>package.json</code> file:</p>
+<pre><code class="hljs css language-js">  <span class="hljs-string">"scripts"</span>: {
+    <span class="hljs-string">"dev"</span>: <span class="hljs-string">"webpack-dev-server --open"</span>,
+    <span class="hljs-string">"build"</span>: <span class="hljs-string">"webpack --progress --mode=production"</span>,
+    <span class="hljs-string">"predeploy"</span>: <span class="hljs-string">"npm run build"</span>,
+    <span class="hljs-string">"deploy"</span>: <span class="hljs-string">"warp deploy --asset-dir=dist ."</span>
+  },
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="basic-usage"></a><a href="#basic-usage" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Basic Usage</h2>
+<h3><a class="anchor" aria-hidden="true" id="development"></a><a href="#development" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Development</h3>
+<p>Run your project on development mode from your local environment:</p>
+<pre><code class="hljs css language-bash"><span class="hljs-comment"># run a dev server</span>
+npm run dev
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="production"></a><a href="#production" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Production</h3>
+<p>Deploy your WarpJS project in production with the following commands:</p>
+<pre><code class="hljs css language-bash"><span class="hljs-comment"># build &amp; deploy to prod</span>
+npm run deploy
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/getting-started"><span class="arrow-prev">← </span><span>Quick Start</span></a><a class="docs-next button" href="/docs/nodejs-modules"><span>Using Node.js Modules</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#configure-webpack">Configure webpack</a><ul class="toc-headings"><li><a href="#install-warp-plugin">Install Warp plugin</a></li><li><a href="#update-webpack-config">Update webpack config</a></li></ul></li><li><a href="#create-a-warp-function">Create a Warp function</a><ul class="toc-headings"><li><a href="#install-packages">Install packages</a></li><li><a href="#init-engine">Init engine</a></li><li><a href="#add-directive">Add directive</a></li><li><a href="#warp-call">Warp call</a></li></ul></li><li><a href="#update-npm-scripts">Update npm scripts</a></li><li><a href="#basic-usage">Basic Usage</a><ul class="toc-headings"><li><a href="#development">Development</a></li><li><a href="#production">Production</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/logo.png" alt="WarpJS" height="32"/></a><div><h5>Docs</h5><a href="/docs/.">Getting Started</a><a href="/docs/api/">API Reference</a></div><div><h5>WarpJS</h5><a href="https://warpjs.com/" target="_blank" rel="noopener">Website</a><a href="https://twitter.com/WeWarpJS" target="_blank" rel="noreferrer noopener">Twitter</a><a href="https://www.linkedin.com/showcase/warpjs/" target="_blank" rel="noreferrer noopener">LinkedIn</a></div><div><h5>More</h5><a href="https://www.npmjs.com/package/@warpjs/warp" target="_blank" rel="noreferrer noopener">npm</a><a href="https://github.com/warpjs/warp" target="_blank" rel="noreferrer noopener">GitHub</a><a href="https://www.scaledynamics.io/" target="_blank" rel="noopener">About Us</a></div></section><section class="copyright">© ScaleDynamics - 2020</section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '233107f0570beb34471275f8374a1655',
+                indexName: 'warpjs',
+                inputSelector: '#search_input_react'
+              });
+            </script></body></html>
