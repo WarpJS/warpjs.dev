@@ -69,7 +69,7 @@
 <h2><a class="anchor" aria-hidden="true" id="listing-commands"></a><a href="#listing-commands" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Listing commands</h2>
 <p>To get a list of commands, run:</p>
 <pre><code class="hljs css language-bash">$ npx warp <span class="hljs-built_in">help</span>
-$ npx warp -h 
+$ npx warp -h
 </code></pre>
 <p>To get details about a command's options, run:</p>
 <pre><code class="hljs css language-bash">$ npx warp <span class="hljs-built_in">help</span> [<span class="hljs-built_in">command</span>]
@@ -106,8 +106,8 @@ $ npx warp &lt;<span class="hljs-built_in">command</span>&gt; -h
 <h4><a class="anchor" aria-hidden="true" id="output-formats"></a><a href="#output-formats" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Output Formats</h4>
 <p>WarpJS supports several formats to generate the JavaScript client:</p>
 <h5><a class="anchor" aria-hidden="true" id="umd"></a><a href="#umd" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>umd</code></h5>
-<p>Universal Module Definition is capable of working everywhere, be it in the client, on the server or elsewhere...</p>
-<p>It can be useful to import the client with a <code>&lt;script&gt;</code> tag.</p>
+<p>Universal Module Definition (UMD) is capable of working everywhere, be it in the client, on the server or elsewhere.</p>
+<p>It can be useful to import the client with an HTML <code>&lt;script&gt;</code> tag.</p>
 <pre><code class="hljs">$ npx warp build -o umd:./client/src/warp-client.js .<span class="hljs-built_in">/server
 </span></code></pre>
 <h5><a class="anchor" aria-hidden="true" id="node-module"></a><a href="#node-module" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>node-module</code></h5>
@@ -141,14 +141,14 @@ $ npx warp build ./server
 <tr><th>Option</th><th>Description</th></tr>
 </thead>
 <tbody>
-<tr><td><code>--asset-dir &lt;asset-directory&gt;</code></td><td>the path to your static front-end if you want to deploy it in addition of serverless functions</td></tr>
+<tr><td><code>--asset-dir &lt;asset-directory&gt;</code></td><td>the path to your static front end if you want to deploy it in addition of serverless functions</td></tr>
 </tbody>
 </table>
 <blockquote>
 <p>All relative paths from the CLI are relative to <code>PWD</code>.</p>
 </blockquote>
 <h4><a class="anchor" aria-hidden="true" id="examples-1"></a><a href="#examples-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Examples</h4>
-<pre><code class="hljs css language-bash">$ npx warp deploy . 
+<pre><code class="hljs css language-bash">$ npx warp deploy .
 $ npx warp deploy --asset-dir ../build .
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="login"></a><a href="#login" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>login</h3>
@@ -156,7 +156,7 @@ $ npx warp deploy --asset-dir ../build .
 <pre><code class="hljs css language-bash">$ npx warp login [options] [e-mail]
 </code></pre>
 <blockquote>
-<p>Create an account on our <a href="https://starbase.warpjs.com/signup">developer console</a>. WarpJS is currently being tested by a wide community of developers. You need to get a link from a member with an active account. If you don't know any member, please request a Private Beta Access on <a href="https://warpjs.com">warpjs.com</a> by clicking on the <code>Join Free</code> button.</p>
+<p>Create an account on your <a href="https://starbase.warpjs.com/signup">WarpJS console</a>. WarpJS is currently being tested by a wide community of developers. You need to get a link from a member with an active account. If you don't know any member, please request a Private Beta Access on <a href="https://warpjs.com">warpjs.com</a> by clicking on the <code>Join Free</code> button.</p>
 </blockquote>
 <h4><a class="anchor" aria-hidden="true" id="options-2"></a><a href="#options-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Options</h4>
 <table>
@@ -211,19 +211,19 @@ $ npx warp login email@domain.com -p my-password
 <h4><a class="anchor" aria-hidden="true" id="output-formats-1"></a><a href="#output-formats-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Output Formats</h4>
 <p>WarpJS supports several formats to generate the JavaScript client:</p>
 <h5><a class="anchor" aria-hidden="true" id="umd-1"></a><a href="#umd-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>umd</code></h5>
-<p>Universal Module Definition is capable of working everywhere, be it in the client, on the server or elsewhere...</p>
-<p>It can be useful to import the client with a <code>&lt;script&gt;</code> tag.</p>
-<pre><code class="hljs">$ npx warp start-emulator -o umd:./client/src/warp-client.js .<span class="hljs-built_in">/server </span>-w 
+<p>Universal Module Definition (UMD) is capable of working everywhere, be it in the client, on the server or elsewhere.</p>
+<p>It can be useful to import the client with an HTML <code>&lt;script&gt;</code> tag.</p>
+<pre><code class="hljs">$ npx warp start-emulator -o umd:./client/src/warp-client.js .<span class="hljs-built_in">/server </span>-w
 </code></pre>
 <p>Options can be omitted if you use <a href="warp-config">warp.config.js</a>.</p>
 <p>The CLI overrides values from <code>warp.config.js</code>.</p>
 <h5><a class="anchor" aria-hidden="true" id="node-module-1"></a><a href="#node-module-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>node-module</code></h5>
 <p>Use it to generate a npm module with its <code>package.json</code>.</p>
 <p>The path has to be the target directory containing the <code>node_modules</code> directory.</p>
-<pre><code class="hljs">$ npx warp start-emulator -o node-module:./client/ .<span class="hljs-built_in">/server </span>-w 
+<pre><code class="hljs">$ npx warp start-emulator -o node-module:./client/ .<span class="hljs-built_in">/server </span>-w
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="examples-3"></a><a href="#examples-3" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Examples</h4>
-<pre><code class="hljs css language-bash">$ npx warp start-emulator -o umd:./client/src/warp-client.js ./server -w 
+<pre><code class="hljs css language-bash">$ npx warp start-emulator -o umd:./client/src/warp-client.js ./server -w
 $ npx warp start-emulator -o node-module:./client/ ./server -w
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="stop-emulator"></a><a href="#stop-emulator" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>stop-emulator</h3>
