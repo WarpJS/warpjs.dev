@@ -29,8 +29,11 @@ window.addEventListener("load", function () {
 
           // update url
           urlSearchParams.set("choice", activeTab.textContent);
-          const url = window.location.pathname + "?" + urlSearchParams.toString();
-          history.pushState(null, "", url);
+          const newUrl = window.location.pathname + "?" + urlSearchParams.toString() + window.location.hash;
+          const currentUrl = window.location.href.replace(window.location.origin, "");
+          if (newUrl !== currentUrl) {
+            history.pushState(null, "", newUrl);
+          }
 
           // sync tabs
           const currentGroup = activeTab.dataset.group;
