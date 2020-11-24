@@ -88,7 +88,7 @@ In this example, we are simply writing a <code>hello</code> function that return
 <p>To install the SDK you need Node.js installed on your computer. Look to <a href="https://nodejs.org/en/download/">https://nodejs.org/en/download/</a> to install it.</p>
 </blockquote>
 <p>Install WarpJS SDK that will provide all the commands to warp our module</p>
-<pre><code class="hljs css language-bash">npm install warp@dev --save-dev
+<pre><code class="hljs css language-bash">npm install warp --save-dev
 </code></pre>
 <p>Then, login using your credentials:</p>
 <pre><code class="hljs css language-bash">npx warp login  
@@ -117,7 +117,7 @@ npx warp emulator run
   <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"./myWarpedModule.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
-      <span class="hljs-keyword">const</span> MyModule = <span class="hljs-built_in">window</span>[<span class="hljs-string">'myWarpedModule-client'</span>]
+      <span class="hljs-keyword">const</span> MyModule = <span class="hljs-built_in">window</span>[<span class="hljs-string">'mymodule-client'</span>]
       MyModule.loadEngine().then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
         <span class="hljs-keyword">const</span> { hello } = <span class="hljs-keyword">new</span> MyModule()  
         hello(<span class="hljs-string">'Kirk'</span>).then(<span class="hljs-function">(<span class="hljs-params">message</span>) =&gt;</span> {  
